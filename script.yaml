@@ -1,0 +1,395 @@
+# Bastidores de Projetos com WordPress: a palestra, em pt-BR.
+# O foco são os bastidores (como um projeto nasce, se organiza e passa pelo
+# WordPress.org), não o plugin: ele é o caso, não o assunto.
+#
+# Uma fonte para tudo: a voz (tts.mjs), a gravação dos slides (record.mjs), as
+# legendas, a transcrição, o teleprompter (review.mjs) e o áudio de treino
+# (rehearse.mjs).
+#
+# Narração: frases curtas, terminadas em . ? ou !; cada frase é a unidade dos
+# `cue: N` (a ação acontece quando a frase N começa) e das legendas.
+# `pronuncia` muda só o que a voz lê; o teleprompter mostra o texto como está.
+title: Bastidores de Projetos com WordPress
+voice: Luciana
+rate: 178
+# Duas versões (VERSAO=curta, o padrão, ou VERSAO=completa): a curta lê `narration`,
+# a completa lê `completa`, com as mesmas frases por cena e as mesmas ações.
+# speed acelera a voz já gravada (ffmpeg atempo, sem mudar o tom).
+versoes:
+  curta: { rate: 215, gap: 0.25 }
+  completa: { rate: 178, gap: 0.35, speed: 1.3 }
+resolution: 1920x1080
+pronuncia:
+  WordPress.org: WordPress ponto org
+  translate.wordpress.org: translate ponto WordPress ponto org
+  eizport.github.io: eizport ponto github ponto io
+  WXR: W X R
+  PHPCS: P H P C S
+  WPCS: W P C S
+  PCP: P C P
+  PTE: P T E
+  IA: I A
+  Playground: Plêigraund
+  blueprint: blúprint
+  blueprints: blúprints
+  steps: stéps
+  staging: stêidjing
+  deploy: diplói
+  pipelines: páipláins
+  bundle: bândol
+  zip: zíp
+  backlog: béclog
+  commit: comít
+  skills: squíls
+  skill: squíl
+  prompts: prômpts
+  fuzzy: fâzi
+  sprint: sprínt
+  Playwright: Plêiráit
+  screenshots: scrínchóts
+  Gutenberg: Gútemberg
+  WooCommerce: Uucómérce
+  Jetpack: Djétpéqui
+  Automattic: Ótomátic
+  GitHub: Guít-Rãb
+  Plugin Check: Plâguin Tchéc
+  Eizport: Eizpórt
+  Fellyph: Félifi
+  Kossmann: Cósman
+  Apoia.se: Apóia-se
+  PainelWP: Painel W P
+  Adobe Commerce: Adôbi Comérce
+  Magento: Madjênto
+  Shopify: Chópifai
+  BigCommerce: Big Comérce
+  Shopware: Chópuér
+  Figma: Fígma
+  Elementor: Elemêntor
+  ERP: E R P
+  1.0.0: um ponto zero ponto zero
+  1.0.1: um ponto zero ponto um
+  1.2.0: um ponto dois ponto zero
+  Live Preview: Láiv Prívíu
+  html: agá tê ême éle
+  SVN: S V N
+  X.Y.Z: X ponto Y ponto Z
+  WordCamp: Uórdcamp
+  readme: rídmi
+  trunk: trânc
+  migrations: maigrêichons
+  patches: pétchis
+  pot: póti
+  po: pê ó
+  mo: ême ó
+  XML: xis eme ele
+  WordPress.tv: WordPress ponto tê vê
+  WordPress/WooCommerce: WordPress com Uucómérce
+  Exporter Importer Z: Ecspórter Impórter Zi
+  Project Translation Editor: Próject Transleichon Éditor
+
+scenes:
+  - id: abertura
+    title: Abertura
+    narration: >
+      Olá!
+      Sou Gilberto Tavares, desenvolvedor WordPress desde 2012.
+      Estes são os bastidores de como uma dor que se repete virou um plugin no diretório oficial.
+      Meu primeiro plugin no diretório é o caso, não o assunto.
+    completa: >
+      Olá!
+      Sou Gilberto Tavares, desenvolvedor WordPress profissionalmente desde 2012.
+      Vou falar os bastidores de como uma dor que se repete virou um plugin no diretório oficial, e o os aprendizados.
+      Meu primeiro plugin no diretório é o caso, não o assunto.
+    actions:
+      - slide: title.html
+
+  - id: agencia
+    title: A agência
+    narration: >
+      Desde julho de 2025, trabalho numa agência americana de e-commerce.
+      A maioria dos projetos é Adobe Commerce, o Magento 2.
+      Também WordPress/WooCommerce e outros.
+    completa: >
+      Em julho de 2025, entrei numa agência dos Estados Unidos especializada em e-commerce.
+      A maioria dos projetos é Adobe Commerce, o Magento 2.
+      Também WordPress/WooCommerce e outros.
+    actions:
+      - slide: contexto.html
+      - { cue: 2, step: 1 }
+      - { cue: 3, step: 2 }
+
+  - id: parceiro
+    title: O parceiro
+    narration: >
+      O WordPress vem de um parceiro que integra ERPs ao WooCommerce.
+      O layout fica com a gente, às vezes com o Figma.
+      Os anteriores eram Elementor.
+      O recente usa um tema performático, híbrido de blocos e clássico.
+    actions:
+      - { cue: 1, step: 3 }
+      - { cue: 2, step: 4 }
+      - { cue: 3, step: 5 }
+      - { cue: 4, step: 6 }
+
+  - id: dupla
+    title: A dupla
+    narration: >
+      Somos dois desenvolvedores WordPress/WooCommerce.
+      Ele, primariamente Magento.
+      E eu, esse ano treinado na agência como o primeiro Shopware.
+    actions:
+      - slide: dupla.html
+      - { cue: 2, step: 1 }
+      - { cue: 3, step: 2 }
+
+  - id: problema
+    title: O problema
+    narration: >
+      Qual é o problema?
+      O layout nasce no Figma.
+      No ambiente local, criamos menus, páginas, imagens e conteúdo.
+      Tudo isso precisa se repetir no staging ou em outro ambiente local.
+      Cliente, colega e gerente revisam visualmente.
+      Na prática, tudo é remontado.
+    actions:
+      - slide: problema.html
+      - { cue: 2, step: 1 }
+      - { cue: 3, step: 2 }
+      - { cue: 4, step: 3 }
+      - { cue: 5, step: 4 }
+      - { cue: 6, step: 5 }
+
+  - id: versao
+    title: Versionar o conteúdo
+    narration: >
+      Queria versionar o conteúdo.
+      Como o WooCommerce.
+      Ou como migrations.
+      Mas acoplar conteúdo ao código parecia drástico.
+      Separar era o caminho.
+    actions:
+      - slide: versao.html
+      - { cue: 2, step: 1 }
+      - { cue: 3, step: 2 }
+      - { cue: 4, step: 3 }
+      - { cue: 5, step: 4 }
+
+  - id: ideia
+    title: A primeira tentativa
+    narration: >
+      Sugeri migrations e patches, e foi bem aceito.
+      O gerente vem do Magento, onde isso é natural.
+      Foi aceito o modelo JSON do Playground.
+      O colega liderou, alterando um pouco.
+      Até hoje, sem uso efetivo.
+      Também houve a questão de armazenar mídia sem inflar o Git.
+    actions:
+      - slide: ideia.html
+      - { cue: 1, step: 1 }
+      - { cue: 3, step: 2 }
+      - { cue: 4, step: 3 }
+      - { cue: 5, step: 4 }
+      - { cue: 6, step: 5 }
+
+  - id: wxr
+    title: As limitações do WXR
+    narration: >
+      Nessa nova solução, segui o exportador e o importador nativos.
+      Limitações conhecidas.
+      Exportar uma página leva todas.
+      O contorno é apagar as outras no local.
+      A mídia é outra exportação, sem juntar páginas e anexos.
+      Vários XML, ou um grande, e imagens dependendo de URL pública.
+    actions:
+      - slide: wxr.html
+      - { cue: 3, step: 1 }
+      - { cue: 4, step: 2 }
+      - { cue: 5, step: 3 }
+      - { cue: 6, step: 4 }
+
+  - id: bundle
+    title: O bundle
+    narration: >
+      O Playground aceita um bundle em zip, com as imagens junto.
+      Montar o zip sem um gerador não compensa.
+    actions:
+      - { cue: 1, step: 5 }
+      - { cue: 2, step: 6 }
+
+  - id: decisao
+    title: A decisão
+    narration: >
+      Decidi não reinventar.
+      Usar o exportador nativo e o importador oficial.
+      Acrescentar o que falta.
+      Assim nasceu o Eizport, antes Exporter Importer Z.
+      São três formatos.
+      XML num zip, para o importador com o Eizport.
+      O bundle do Playground, opcionalmente com temas e plugins.
+      E como plugin, que instala o necessário, importa e se exclui.
+    actions:
+      - slide: decisao.html
+      - { cue: 2, step: 1 }
+      - { cue: 2, pause: 1 }
+      - step: 2
+      - { cue: 3, step: 3 }
+      - { cue: 6, step: 4 }
+      - { cue: 7, step: 5 }
+      - { cue: 8, step: 6 }
+
+  - id: ia
+    title: A IA
+    narration: >
+      Utilizei Inteligência Artificial.
+      Comecei pelas skills oficiais do WordPress.
+      E criei as minhas.
+      A cada sessão, o aprendizado entra nas minhas skills.
+    completa: >
+      Utilizei Inteligência Artificial.
+      Comecei pelas skills oficiais do WordPress.
+      E criei as minhas próprias.
+      A cada sessão, o aprendizado entra nas minhas skills.
+    actions:
+      - slide: ia.html
+      - { cue: 2, step: 1 }
+      - { cue: 3, step: 2 }
+      - { cue: 4, step: 3 }
+
+  - id: referencias
+    title: Código de referência
+    narration: >
+      A resposta de como o WordPress faz está no código.
+      Minha preferência: Gutenberg e WordPress.
+      Também plugins da Automattic: WooCommerce e Jetpack.
+    actions:
+      - { cue: 1, step: 4 }
+      - { cue: 2, step: 5 }
+      - { cue: 3, step: 6 }
+
+  - id: processo
+    title: O processo
+    narration: >
+      Cada funcionalidade começa com a IA no modo de planejamento.
+      Aprovado, segue no modo automático.
+      Se algo fica para depois, entra numa lista.
+      Sempre Git, mesmo local, e nos commits, revisão de diretrizes, qualidade, código e testes.
+    actions:
+      - slide: processo.html
+      - { cue: 1, step: 1 }
+      - { cue: 2, step: 2 }
+      - { cue: 3, step: 3 }
+      - { cue: 4, step: 4 }
+
+  - id: configuracoes
+    title: Preferência vira configuração
+    narration: >
+      Possíveis preferências já nascem como configuração.
+      Tela de exportar moderna, com componentes do Gutenberg.
+      Mas pode não substituir o Exportar.
+      Ou substituir, com a interface clássica.
+      O importador também pode ser clássico.
+      Outras configurações disponíveis.
+    actions:
+      - slide: configuracoes.html
+      - { cue: 2, step: 1 }
+      - { cue: 3, step: 2 }
+      - { cue: 4, step: 3 }
+      - { cue: 5, step: 4 }
+      - { cue: 6, step: 5 }
+
+  - id: documentacao
+    title: A documentação
+    narration: >
+      A documentação faz parte do desenvolvimento.
+      Os screenshots do site e do readme, e o vídeo, são gerados por automatização.
+      Mudou uma funcionalidade ou uma tela?
+      Regera documentação, telas e vídeo.
+      Assim nada fica fragmentado nem desatualizado.
+    actions:
+      - slide: automacao.html
+      - { cue: 2, step: 1 }
+      - { cue: 3, step: 2 }
+      - { cue: 5, step: 3 }
+
+  - id: padroes
+    title: Os padrões
+    narration: >
+      Seguir os padrões desde o começo evita reprovação no diretório.
+      Os padrões de código WPCS.
+      E o Plugin Check Plugin, o PCP, rodando a cada mudança.
+    actions:
+      - slide: padroes.html
+      - { cue: 2, step: 1 }
+      - { cue: 3, step: 2 }
+      - { cue: 3, pause: 1.5 }
+      - step: 3
+
+  - id: diretorio
+    title: O diretório
+    narration: >
+      Criei um usuário no WordPress.org, que representa o projeto.
+      Esse usuário precisou ser liberado, porque foi considerado empresa.
+      Um voluntário explicou que empresa não pode responder no fórum como pessoa.
+      Depois, o envio da versão 1.0.0.
+      Fila longa, mas foram poucas interações em poucos dias, automática e manual, e a aprovação veio na 1.0.1, liberando a URL e o SVN.
+      Em breve sai a 1.2.0, com Live Preview e outras funcionalidades.
+      Ter um plugin publicado pode ser o diferencial numa contratação.
+    actions:
+      - slide: wporg.html
+      - { cue: 1, step: 1 }
+      - { cue: 2, step: 2 }
+      - { cue: 4, step: 3 }
+      - { cue: 5, step: 4 }
+      - { cue: 6, step: 5 }
+      - { cue: 7, step: 6 }
+
+  - id: traducao
+    title: A tradução
+    narration: >
+      Sempre valorizei tradução: código em inglês, pronto para traduzir.
+      Palestrei sobre tradução no WordCamp Porto Alegre, em 2018, disponível no WordPress.tv, mas desatualizado.
+      Já desenvolvi com traduções.
+      Ao aprovar o plugin, o readme e o código foram importados, como sugestões.
+      O Fellyph Cintra encontrou o plugin, talvez pela tag e pela funcionalidade do Playground, e aprovou em poucas horas.
+      Obrigado, Fellyph Cintra!
+      Um único ajuste, que eu corrigi e foi aprovado.
+      Paralelamente, estou na fila para ser PTE.
+    actions:
+      - { cue: 1, step: 7 }
+      - { cue: 2, step: 8 }
+      - { cue: 4, step: 9 }
+      - { cue: 5, step: 10 }
+      - { cue: 7, step: 11 }
+      - { cue: 8, step: 12 }
+
+  - id: licoes
+    title: O que fica
+    narration: >
+      O que fica?
+      Dor que se repete é projeto esperando alguém.
+      Ideia aceita não é ideia usada: às vezes, retome por outro caminho.
+      Use o que a plataforma já oferece.
+      Automatize o que se repete, inclusive a documentação.
+      E publique: um plugin no diretório conta a sua história.
+    completa: >
+      O que fica desses bastidores?
+      Uma dor que se repete é um projeto esperando alguém.
+      Uma ideia aceita não é uma ideia usada: às vezes, é preciso retomar por outro caminho.
+      Use o que a plataforma já oferece antes de criar.
+      Automatize o que se repete, inclusive a documentação.
+      E publique: um plugin no diretório também conta a sua história.
+    actions:
+      - slide: licoes.html
+      - { cue: 2, step: 1 }
+      - { cue: 3, step: 2 }
+      - { cue: 4, step: 3 }
+      - { cue: 5, step: 4 }
+      - { cue: 6, step: 5 }
+
+  - id: apoio
+    title: Apoio
+    narration: >
+      Contribua com issues no GitHub ou no fórum, e no Apoia.se, inspirado no PainelWP, obrigado Daniel Kossmann, e os outros links nos QR codes, incluindo esta apresentação.
+      Obrigado!
+    actions:
+      - slide: perguntas.html

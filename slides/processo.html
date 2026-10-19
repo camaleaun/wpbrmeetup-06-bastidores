@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>O processo</title>
+<link rel="stylesheet" href="slides.css">
+<style>
+.pipe{display:flex;align-items:stretch;gap:22px;margin-top:56px}
+.pipe .card{padding:30px 34px}.pipe .card h3{font-size:34px}.pipe .card p{font-size:26px}
+.to{align-self:center;font-size:52px;color:var(--muted)}
+.note{background:var(--lemon-3);border:2px solid var(--lemon-1);border-radius:2px;padding:24px 30px;font-size:28px;line-height:1.35;margin-top:30px;max-width:900px}
+.note b{font-size:32px}
+.term{margin-top:30px;padding:24px 32px;font-size:28px;line-height:1.6}</style>
+</head>
+<body>
+<div class="kicker">Bastidores</div>
+<h2>Cada funcionalidade, o mesmo caminho</h2>
+<div class="pipe">
+  <div class="card blue" data-show="1" data-focus="1"><h3>1. Plano</h3><p>A IA no modo de planejamento.</p></div>
+  <div class="to" data-show="2">→</div>
+  <div class="card blue" data-show="2" data-focus="2"><h3>2. Aprovação</h3><p>Eu reviso e aprovo o plano.</p></div>
+  <div class="to" data-show="2">→</div>
+  <div class="card alt" data-show="2" data-focus="2"><h3>3. Modo automático</h3><p>A IA implementa.</p></div>
+</div>
+<div class="note" data-show="3" data-focus="3"><b>Backlog</b> · o que não entra de imediato.</div>
+<div class="term" data-show="4">antes de cada commit: <span class="ok">✓ conformidade com as diretrizes · ✓ boas práticas de código · ✓ testes</span></div>
+<script src="slides.js"></script>
+</body>
+</html>

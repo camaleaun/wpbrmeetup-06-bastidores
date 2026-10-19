@@ -1,0 +1,30 @@
+{
+  "name": "wpbrmeetup-06-bastidores",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "qr": "node qr.mjs",
+    "tts": "node tts.mjs",
+    "record": "node record.mjs",
+    "music": "node music.mjs",
+    "mix": "node mix.mjs",
+    "preview": "node preview.mjs",
+    "video": "npm run tts && npm run record && npm run music && npm run mix",
+    "rehearse": "node rehearse.mjs",
+    "review": "node review-server.mjs",
+    "pages": "node pages.mjs",
+    "draft": "node tts.mjs && node preview.mjs && node review.mjs --draft",
+    "draft:completa": "VERSAO=completa npm run draft",
+    "video:completa": "VERSAO=completa npm run video",
+    "rehearse:completa": "VERSAO=completa npm run rehearse",
+    "review:completa": "VERSAO=completa npm run review"
+  },
+  "devDependencies": {
+    "@fontsource/eb-garamond": "^5.2.7",
+    "@fontsource/ibm-plex-mono": "^5.2.7",
+    "@fontsource/inter": "^5.2.8",
+    "playwright": "1.56.1",
+    "qrcode": "1.5.4",
+    "yaml": "2.8.1"
+  }
+}

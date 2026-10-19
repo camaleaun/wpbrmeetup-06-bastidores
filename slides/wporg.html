@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>WordPress.org</title>
+<link rel="stylesheet" href="slides.css">
+<style>
+body{padding:90px 130px}
+h2{font-size:68px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:40px;flex:1}
+.col h3{font-size:30px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.col ol{list-style:none;padding:0;margin:0;counter-reset:s}
+.col li{counter-increment:s;display:flex;gap:18px;align-items:baseline;font-size:27px;line-height:1.35;padding:13px 0;border-bottom:1px solid var(--line)}
+.col li:before{content:counter(s);flex:none;width:40px;height:40px;display:grid;place-items:center;border-radius:2px;background:var(--accent);color:var(--white);font-size:22px;font-weight:700}
+.col li.ok:before{content:"✓";background:var(--acid-green-1);color:var(--charcoal-1)}
+.col li.soon{background:var(--blueberry-4)}.col li.soon:before{content:"→"}
+.col li small{color:var(--muted);font-size:23px}
+.bottom{margin-top:22px;font-size:32px;font-weight:700}
+.fz{font-family:var(--mono);font-size:22px;background:var(--pomegranate-3);padding:2px 8px;border-radius:2px}</style>
+</head>
+<body>
+<div class="kicker">WordPress.org</div>
+<h2>Diretório e tradução</h2>
+<div class="cols">
+  <div class="col">
+    <h3>Diretório</h3>
+    <ol>
+      <li data-show="1" data-focus="1"><span>Um usuário próprio, que representa o projeto <small>e abstrai um pouco de mim</small></span></li>
+      <li data-show="2" data-focus="2"><span>Liberar a conta nova <small>· empresa não responde no fórum como pessoa</small></span></li>
+      <li data-show="3" data-focus="3"><span>Envio da 1.0.0: fila longa, poucas rodadas de correção <small>automática e manual</small></span></li>
+      <li class="ok" data-show="4" data-focus="4"><span>Aprovada na 1.0.1: URL e caminho SVN liberados</span></li>
+      <li class="soon" data-show="5" data-focus="5"><span>Em breve: <b>1.2.0</b>, com Live Preview no diretório e funcionalidades do backlog</span></li>
+    </ol>
+    <p class="bottom" data-show="6">Um plugin publicado pode ser <span class="mark">o diferencial</span> num processo seletivo.</p>
+  </div>
+  <div class="col">
+    <h3>Tradução</h3>
+    <ol>
+      <li data-show="7" data-focus="7"><span>Código em inglês, pronto para traduzir <small data-show="8">· WordCamp Porto Alegre 2018</small></span></li>
+      <li data-show="8" data-focus="8"><span><code>.pot</code> <code>.po</code> <code>.mo</code> já na pasta <code>languages</code></span></li>
+      <li data-show="9" data-focus="9"><span>Aprovado: readme e código importados no translate, como sugestões</span></li>
+      <li class="ok" data-show="10" data-focus="10"><span>Fellyph Cintra aprovou em poucas horas. <b>Obrigado!</b></span></li>
+      <li data-show="11" data-focus="11"><span>Só um <span class="fz">fuzzy</span>, corrigido e aprovado</span></li>
+      <li data-show="12" data-focus="12"><span>Na fila para PTE <small>· aprovar as próximas sugestões</small></span></li>
+    </ol>
+  </div>
+</div>
+<script src="slides.js"></script>
+</body>
+</html>

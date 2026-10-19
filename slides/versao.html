@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Versionar o conteúdo</title>
+<link rel="stylesheet" href="slides.css">
+<style>
+.term{margin-top:20px;padding:20px 24px;font-size:24px;line-height:1.5}
+.verdict{display:flex;gap:32px;margin-top:48px;align-items:center}
+.verdict p{font-size:40px;font-weight:700}
+.verdict .no{color:var(--pomegranate-1);text-decoration:line-through;text-decoration-thickness:3px}</style>
+</head>
+<body>
+<div class="kicker">O que eu queria</div>
+<h2>Versionar o conteúdo</h2>
+<div class="row">
+  <div class="card blue" data-show="1" data-focus="1"><h3>Como o WooCommerce</h3><p>Versões X.Y.Z, com rotinas de atualização.</p>
+    <div class="term"><span class="cmd">wc_update_1030_</span>…</div></div>
+  <div class="card blue" data-show="2" data-focus="2"><h3>Como os frameworks PHP</h3><p>Migrations de banco, aplicadas em ordem.</p>
+    <div class="term"><span class="cmd">migrations/</span>2025_07_…_conteudo.php</div></div>
+</div>
+<div class="verdict">
+  <p class="no" data-show="3">Conteúdo acoplado ao código em revisão</p>
+  <p data-show="4">→ <span class="mark">Separar</span> pode ser o caminho.</p>
+</div>
+<script src="slides.js"></script>
+</body>
+</html>

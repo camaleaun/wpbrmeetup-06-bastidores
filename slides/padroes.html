@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Padrões</title>
+<link rel="stylesheet" href="slides.css">
+<style>
+.term{margin-top:56px;font-family:var(--mono);font-size:32px;background:var(--ink);color:var(--light-grey-2);border-radius:2px;padding:34px 40px;line-height:1.6}
+.term .ok{color:var(--acid-green-1)}.term .cmd{color:var(--blueberry-2)}</style>
+</head>
+<body>
+
+<div class="kicker">Antes de enviar</div>
+<h2>Padrões evitam reprovação</h2>
+<div class="row">
+  <div class="card blue" data-show="1" data-focus="1"><h3>PHPCS + WPCS</h3><p>Os padrões de código do WordPress: escapar, sanitizar, nonces, prefixos.</p></div>
+  <div class="card blue" data-show="2" data-focus="2"><h3>Plugin Check (PCP)</h3><p>A mesma verificação do diretório, rodando a cada mudança.</p></div>
+</div>
+<div class="term" data-show="3"><span class="cmd">$ composer check</span>  <span class="ok">✓ lint · WPCS · PHPUnit</span><br><span class="cmd">$ bin/plugin-check.sh</span>  <span class="ok">✓ Success: Checks complete. No errors found.</span></div>
+<script src="slides.js"></script>
+</body>
+</html>
