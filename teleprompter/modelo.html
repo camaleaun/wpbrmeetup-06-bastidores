@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000">
+<title>Teleprompter · Bastidores</title>
+<style>
+  :root {
+    --bg: #000;
+    --fg: #f5f5f0;
+    --dim: #8a8a85;
+    --accent: #9fb1ff; /* WordPress.org Blueberry 2 */
+    --blue: #3858e9; /* Blueberry */
+    --bar: rgba(20, 20, 20, .92);
+    --size: 56px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg); font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+  body { overflow: hidden; }
+
+  #palco { position: fixed; inset: 0; overflow-y: scroll; scrollbar-width: none; }
+  #palco::-webkit-scrollbar { display: none; }
+  #texto { max-width: 34em; margin: 0 auto; padding: 38vh 16px 70vh; font-size: var(--size); line-height: 1.45; font-weight: 600; }
+  #texto p { margin: 0 0 1.1em; }
+  #texto h2 { margin: 1.6em 0 .5em; font-size: .4em; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--dim); }
+  #texto h2:first-child { margin-top: 0; }
+  #texto h2.pergunta { font-size: .55em; letter-spacing: 0; text-transform: none; color: var(--accent); }
+  .resp { color: var(--accent); opacity: .7; font-weight: 400; margin: 0 .1em; }
+  /* Modo Vídeo: a frase que a voz está lendo acende; as outras ficam apagadas. */
+  body.video .frase { opacity: .35; transition: opacity .25s; }
+  body.video .frase.agora { opacity: 1; }
+  body.espelho #texto { transform: scaleX(-1); }
+
+  /* Linha de leitura */
+  #guia { position: fixed; left: 0; right: 0; top: 38vh; height: 0; border-top: 2px solid var(--accent); opacity: .55; pointer-events: none; }
+  #guia::before, #guia::after { content: ""; position: absolute; top: -9px; border: 8px solid transparent; }
+  #guia::before { left: 0; border-left-color: var(--accent); }
+  #guia::after { right: 0; border-right-color: var(--accent); }
+  #sombra-topo, #sombra-baixo { position: fixed; left: 0; right: 0; pointer-events: none; }
+  #sombra-topo { top: 0; height: 22vh; background: linear-gradient(var(--bg), transparent); }
+  #sombra-baixo { bottom: 0; height: 25vh; background: linear-gradient(transparent, var(--bg)); }
+
+  #contagem { position: fixed; inset: 0; display: none; place-items: center; font-size: 30vmin; font-weight: 700; color: var(--accent); background: rgba(0,0,0,.6); }
+  #contagem.ativa { display: grid; }
+
+  #tempo { position: fixed; top: 12px; right: 16px; font: 600 20px/1 ui-monospace, Menlo, monospace; color: var(--dim); font-variant-numeric: tabular-nums; text-align: right; }
+  #tempo.acabando { color: var(--accent); }
+  #sinal { display: block; margin-top: 6px; font-size: 13px; }
+
+  #barra { position: fixed; left: 0; right: 0; bottom: 0; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: center; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); background: var(--bar); font-size: 15px; transition: opacity .3s; }
+  body.rodando #barra { opacity: 0; }
+  body.rodando #barra:hover, body.rodando #barra:focus-within { opacity: 1; }
+  #barra label { display: flex; align-items: center; gap: 6px; color: var(--dim); }
+  #barra output { min-width: 3.2em; color: var(--fg); font-variant-numeric: tabular-nums; }
+  body.video .so-livre { display: none !important; }
+  select, button { font: inherit; color: var(--fg); background: #2a2a2a; border: 1px solid #444; border-radius: 6px; padding: 6px 10px; cursor: pointer; }
+  button.principal { background: #3858e9; border-color: #3858e9; color: #fff; font-weight: 700; min-width: 7em; }
+  .modos { display: inline-flex; border: 1px solid #444; border-radius: 6px; overflow: hidden; }
+  .modos button { border: 0; border-radius: 0; background: #2a2a2a; }
+  .modos button.on { background: var(--blue); color: #fff; font-weight: 700; }
+  .modos button:disabled { opacity: .4; cursor: not-allowed; }
+  input[type=range] { width: 110px; accent-color: var(--accent); }
+  .atalhos { flex-basis: 100%; text-align: center; color: var(--dim); font-size: 13px; }
+  kbd { font: 12px ui-monospace, Menlo, monospace; padding: 1px 5px; border: 1px solid #555; border-radius: 4px; }
+  @media (max-width: 600px) { .atalhos { display: none; } input[type=range] { width: 80px; } }
+</style>
+</head>
+<body>
+<div id="palco"><div id="texto"></div></div>
+<div id="sombra-topo"></div>
+<div id="sombra-baixo"></div>
+<div id="guia"></div>
+<div id="tempo"><span id="relogio">0:00 / 0:00</span><span id="sinal"></span></div>
+<div id="contagem"></div>
+
+<div id="barra">
+  <span class="modos" role="group" aria-label="Modo">
+    <button id="modo-livre" class="on">Livre</button><button id="modo-video" title="Segue o vídeo (review.html)">Vídeo</button>
+  </span>
+  <label>Versão
+    <select id="versao"></select>
+  </label>
+  <button id="play" class="principal so-livre">▶ Começar</button>
+  <button id="voltar" class="so-livre" title="Voltar ao início">⏮</button>
+  <label class="so-livre">Ritmo <input id="ritmo" type="range" min="80" max="240" step="5"> <output id="ritmo-val"></output></label>
+  <label>Letra <input id="letra" type="range" min="28" max="120" step="2"> <output id="letra-val"></output></label>
+  <label><input id="espelho" type="checkbox"> Espelhar</label>
+  <label class="so-livre"><input id="contar" type="checkbox" checked> Contagem 3 s</label>
+  <button id="tela" title="Tela cheia">⛶</button>
+  <div class="atalhos"><kbd>Espaço</kbd> começar/pausar · <kbd>↑</kbd><kbd>↓</kbd> ritmo · <kbd>+</kbd><kbd>−</kbd> letra · <kbd>←</kbd><kbd>→</kbd> recuar/avançar · <kbd>R</kbd> início · <kbd>M</kbd> espelhar · <kbd>F</kbd> tela cheia · <kbd>V</kbd> modo · roda do mouse rola o texto</div>
+</div>
+
+<script>
+// Gerado por teleprompter.mjs a partir de script.yaml, build/transcript.json e PERGUNTAS.md.
+// Cada versão: { nome, palavras, limite? (segundos, conta para trás), blocos: [{ titulo, pergunta?, frases: [{ texto, s?, e? }] }] }.
+const ROTEIROS = /*ROTEIROS*/;
+
+const $ = (id) => document.getElementById(id);
+const palco = $('palco'), texto = $('texto');
+const guardar = (k, v) => { try { localStorage.setItem('tp-bastidores-' + k, v); } catch (e) {} };
+const ler = (k, d) => { try { return localStorage.getItem('tp-bastidores-' + k) ?? d; } catch (e) { return d; } };
+const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+
+let rodando = false, ultimo = 0, decorrido = 0, posicao = 0, pxPorSeg = 0, contando = null, total = 0;
+let modo = 'livre';
+
+ROTEIROS.forEach((r, i) => $('versao').add(new Option(`${r.nome} (${r.palavras} palavras)`, i)));
+$('versao').value = Math.min(+ler('versao', 0), ROTEIROS.length - 1);
+$('ritmo').value = ler('ritmo', 165);
+$('letra').value = ler('letra', 56);
+$('espelho').checked = ler('espelho', '0') === '1';
+const roteiro = () => ROTEIROS[$('versao').value];
+const temTempos = (r) => r.blocos.some((b) => b.frases.some((f) => f.s !== undefined));
+
+// Vírgulas ganham uma barra: é onde dá para respirar.
+const respirar = (s) => esc(s).replace(/([,:;—])\s/g, '$1<span class="resp">/</span> ');
+
+function montar() {
+  const r = roteiro();
+  texto.innerHTML = '';
+  r.blocos.forEach((b) => {
+    if (b.titulo) { const h = document.createElement('h2'); h.textContent = b.titulo; if (b.pergunta) h.className = 'pergunta'; texto.append(h); }
+    const p = document.createElement('p');
+    p.innerHTML = b.frases.map((f) => `<span class="frase"${f.s !== undefined ? ` data-s="${f.s}" data-e="${f.e}"` : ''}>${respirar(f.texto)}</span>`).join(' ');
+    texto.append(p);
+  });
+  $('modo-video').disabled = ! temTempos(r);
+  if (modo === 'video' && ! temTempos(r)) mudarModo('livre');
+  voltar();
+  calcular();
+}
+
+// Velocidade: percorre o texto inteiro no tempo que o ritmo (palavras por minuto) dá.
+function calcular() {
+  const r = roteiro();
+  const wpm = +$('ritmo').value;
+  total = r.limite ?? r.palavras / wpm * 60;
+  const leitura = r.palavras / wpm * 60;
+  const primeira = texto.firstElementChild, ultima = texto.lastElementChild;
+  const altura = (ultima.offsetTop + ultima.offsetHeight) - primeira.offsetTop;
+  pxPorSeg = altura / leitura;
+  $('ritmo-val').textContent = wpm + ' ppm';
+  $('letra-val').textContent = $('letra').value + ' px';
+  mostrarTempo();
+}
+
+const fmt = (s) => `${Math.floor(s / 60)}:${String(Math.floor(Math.max(0, s) % 60)).padStart(2, '0')}`;
+function mostrarTempo(t = decorrido) {
+  const r = roteiro();
+  // Perguntas: o tempo que resta, não o que passou.
+  if (r.limite && modo === 'livre') {
+    $('relogio').textContent = `restam ${fmt(r.limite - t)}`;
+    $('tempo').classList.toggle('acabando', r.limite - t < 60);
+  } else {
+    $('relogio').textContent = `${fmt(t)} / ${fmt(total)}`;
+    $('tempo').classList.remove('acabando');
+  }
+}
+
+// ── Modo Livre: rola sozinho. ──────────────────────────────────────────────
+function quadro(t) {
+  if (!rodando) return;
+  const dt = (t - ultimo) / 1000; ultimo = t;
+  decorrido += dt;
+  posicao += pxPorSeg * dt;
+  palco.scrollTop = posicao;
+  mostrarTempo();
+  // No fim do texto a rolagem para; nas perguntas o relógio continua até zerar.
+  if (palco.scrollTop + 2 < posicao && ! roteiro().limite) { pausar(); return; }
+  if (roteiro().limite && decorrido >= roteiro().limite) { pausar(); return; }
+  requestAnimationFrame(quadro);
+}
+function iniciar() {
+  rodando = true; document.body.classList.add('rodando');
+  $('play').textContent = '⏸ Pausar';
+  posicao = palco.scrollTop; ultimo = performance.now();
+  requestAnimationFrame(quadro);
+}
+function pausar() {
+  rodando = false; document.body.classList.remove('rodando');
+  $('play').textContent = '▶ Continuar';
+  if (contando) { clearInterval(contando); contando = null; $('contagem').classList.remove('ativa'); }
+}
+function alternar() {
+  if (modo !== 'livre') return;
+  if (rodando || contando) return pausar();
+  if (!$('contar').checked || decorrido > 0) return iniciar();
+  let n = 3; const c = $('contagem');
+  c.textContent = n; c.classList.add('ativa');
+  $('play').textContent = '⏸ Pausar';
+  contando = setInterval(() => {
+    n--;
+    if (n > 0) { c.textContent = n; return; }
+    clearInterval(contando); contando = null; c.classList.remove('ativa');
+    iniciar();
+  }, 1000);
+}
+function voltar() {
+  pausar(); palco.scrollTop = 0; posicao = 0; decorrido = 0;
+  $('play').textContent = '▶ Começar'; mostrarTempo();
+}
+function pular(px) { palco.scrollTop += px; posicao = palco.scrollTop; }
+
+// ── Modo Vídeo: segue o vídeo do review.html. ──────────────────────────────
+// No celular, pelo review-server.mjs (/events); na mesma máquina, por BroadcastChannel.
+let estado = { t: 0, playing: false, local: Date.now() }, mostrada = null, fonte = null, canal = null;
+function receber(dados) { estado = { ...dados, local: Date.now() }; }
+function conectar() {
+  if (location.protocol.startsWith('http')) {
+    fonte = new EventSource('events');
+    fonte.onmessage = (e) => receber(JSON.parse(e.data));
+    fonte.onopen = () => ($('sinal').textContent = 'sincronizado');
+    fonte.onerror = () => ($('sinal').textContent = 'reconectando…');
+  }
+  if ('BroadcastChannel' in window) {
+    canal = new BroadcastChannel('teleprompter-bastidores');
+    canal.onmessage = (e) => { receber(e.data); $('sinal').textContent = 'sincronizado'; };
+  }
+  $('sinal').textContent = 'esperando o vídeo…';
+}
+function desconectar() { fonte?.close(); canal?.close(); fonte = canal = null; $('sinal').textContent = ''; }
+function seguir() {
+  if (modo !== 'video') return;
+  const t = estado.t + (estado.playing ? (Date.now() - estado.local) / 1000 : 0);
+  mostrarTempo(t);
+  const frases = [...texto.querySelectorAll('.frase[data-s]')];
+  const agora = frases.find((f) => t >= +f.dataset.s && t < +f.dataset.e) ?? frases.filter((f) => +f.dataset.s <= t).at(-1);
+  if (agora && agora !== mostrada) {
+    mostrada?.classList.remove('agora');
+    agora.classList.add('agora');
+    mostrada = agora;
+    // A frase da vez vai para a linha de leitura.
+    const alvo = agora.getBoundingClientRect().top + palco.scrollTop - innerHeight * 0.38 + 8;
+    palco.scrollTo({ top: alvo, behavior: 'smooth' });
+  }
+}
+function mudarModo(novo) {
+  if (novo === 'video' && $('modo-video').disabled) return;
+  modo = novo;
+  pausar();
+  document.body.classList.toggle('video', modo === 'video');
+  $('modo-livre').classList.toggle('on', modo === 'livre');
+  $('modo-video').classList.toggle('on', modo === 'video');
+  mostrada?.classList.remove('agora'); mostrada = null;
+  if (modo === 'video') { total = roteiro().blocos.flatMap((b) => b.frases).reduce((m, f) => Math.max(m, f.e ?? 0), 0); conectar(); }
+  else { desconectar(); calcular(); }
+  guardar('modo', modo);
+}
+setInterval(seguir, 200);
+
+$('modo-livre').onclick = () => mudarModo('livre');
+$('modo-video').onclick = () => mudarModo('video');
+$('play').onclick = alternar;
+$('voltar').onclick = voltar;
+$('versao').onchange = () => { guardar('versao', $('versao').value); montar(); };
+$('ritmo').oninput = () => { guardar('ritmo', $('ritmo').value); calcular(); };
+$('letra').oninput = () => {
+  document.documentElement.style.setProperty('--size', $('letra').value + 'px');
+  guardar('letra', $('letra').value); if (modo === 'livre') calcular();
+};
+$('espelho').onchange = () => { document.body.classList.toggle('espelho', $('espelho').checked); guardar('espelho', $('espelho').checked ? '1' : '0'); };
+$('tela').onclick = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen?.();
+palco.addEventListener('click', alternar);
+palco.addEventListener('scroll', () => { if (!rodando) posicao = palco.scrollTop; });
+
+document.addEventListener('keydown', (e) => {
+  if (e.target.tagName === 'SELECT' || (e.target.tagName === 'INPUT' && e.key !== ' ')) return;
+  const passo = (id, d) => { const el = $(id); el.value = +el.value + d * +el.step; el.dispatchEvent(new Event('input')); };
+  switch (e.key) {
+    case ' ': e.preventDefault(); e.target.blur?.(); alternar(); break;
+    case 'ArrowUp': e.preventDefault(); passo('ritmo', 1); break;
+    case 'ArrowDown': e.preventDefault(); passo('ritmo', -1); break;
+    case '+': case '=': passo('letra', 1); break;
+    case '-': case '_': passo('letra', -1); break;
+    case 'ArrowLeft': e.preventDefault(); pular(-innerHeight * .25); break;
+    case 'ArrowRight': e.preventDefault(); pular(innerHeight * .25); break;
+    case 'r': case 'R': case 'Home': voltar(); break;
+    case 'm': case 'M': $('espelho').click(); break;
+    case 'f': case 'F': $('tela').click(); break;
+    case 'v': case 'V': mudarModo(modo === 'livre' ? 'video' : 'livre'); break;
+  }
+});
+
+document.documentElement.style.setProperty('--size', $('letra').value + 'px');
+document.body.classList.toggle('espelho', $('espelho').checked);
+addEventListener('resize', () => { if (modo === 'livre') calcular(); });
+montar();
+// Aberto pelo review-server.mjs (celular), começa seguindo o vídeo.
+if (location.protocol.startsWith('http') && ! $('modo-video').disabled) mudarModo('video');
+else if (ler('modo', 'livre') === 'video') mudarModo('video');
+</script>
+</body>
+</html>

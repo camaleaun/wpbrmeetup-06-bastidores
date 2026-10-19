@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>A decisão</title>
+<link rel="stylesheet" href="slides.css">
+<style>
+.fmts{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:30px}
+.fmt{border:2px solid var(--accent);background:var(--blueberry-4);border-radius:2px;padding:20px 26px;font-size:25px;line-height:1.35;color:var(--muted)}
+.fmt b{display:block;font-size:30px;color:var(--ink);margin-bottom:4px}
+.add{margin-top:36px;display:flex;align-items:center;gap:26px;font-size:36px}
+</style>
+</head>
+<body>
+<div class="kicker">A decisão</div>
+<h2>Não reinventar</h2>
+<p class="lead">O máximo do que o WordPress já oferece. Só o que falta, por cima.</p>
+<div class="row">
+  <div class="card blue" data-show="1" data-focus="1"><h3>Exportação nativa</h3><p>Ferramentas → Exportar, o mesmo WXR de sempre.</p></div>
+  <div class="card blue" data-show="2" data-focus="2"><h3>Importador oficial</h3><p>O WordPress Importer, estendido, não substituído.</p></div>
+  <div class="card alt" data-show="3" data-focus="3"><h3>+ o que falta</h3><p>Um pacote com o conteúdo e as imagens juntos, escolhendo o que vai.</p></div>
+</div>
+<div class="add" data-show="3"><span>Eizport: resolve essas questões do exportador e do importador.</span></div>
+<div class="fmts">
+  <div class="fmt" data-show="4" data-focus="4"><b>.zip</b>WXR em XML num zip, para o importador oficial com o Eizport ativo</div>
+  <div class="fmt" data-show="5" data-focus="5"><b>Playground .zip</b>pode incluir temas e plugins</div>
+  <div class="fmt" data-show="6" data-focus="6"><b>Como plugin</b>autocontido: pede o Eizport e o Importer, importa e se exclui no fim</div>
+</div>
+<script src="slides.js"></script>
+</body>
+</html>

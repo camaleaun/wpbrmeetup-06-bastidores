@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Slides · Bastidores de Projetos com WordPress</title>
+<link rel="stylesheet" href="slides.css">
+<style>
+html, body { width: auto; height: auto; overflow: auto; }
+body { padding: 60px 80px; display: block; }
+h1 { font-size: 64px; margin: 8px 0 40px; }
+ol { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 28px; padding: 0; list-style: none; }
+a { display: block; color: var(--ink); text-decoration: none; font-size: 20px; }
+iframe { width: 1920px; height: 1080px; border: 0; transform: scale(.2); transform-origin: 0 0; pointer-events: none; }
+.thumb { width: 384px; height: 216px; overflow: hidden; border: 1px solid var(--line); border-radius: 2px; margin-bottom: 8px; }
+a:hover .thumb { border-color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="kicker">Slides</div>
+<h1>Bastidores de Projetos com WordPress</h1>
+<ol id="list"></ol>
+<script>
+const ORDER = ['title.html', 'contexto.html', 'dupla.html', 'problema.html', 'versao.html', 'ideia.html', 'wxr.html', 'decisao.html', 'processo.html', 'configuracoes.html', 'automacao.html', 'padroes.html', 'wporg.html', 'ia.html', 'licoes.html', 'perguntas.html'];
+document.getElementById('list').innerHTML = ORDER.map((f, i) => `<li><a href="${f}"><div class="thumb"><iframe src="${f}#99" loading="lazy" tabindex="-1"></iframe></div>${i + 1}. ${f.replace('.html', '')}</a></li>`).join('');
+</script>
+</body>
+</html>

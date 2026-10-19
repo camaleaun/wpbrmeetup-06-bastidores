@@ -1,0 +1,87 @@
+/* Shared look for the 1920x1080 slides: the WordPress.org brand and design system
+   only (wporg-parent-2021 theme.json): Charcoal, Light Grey and Blueberry, with
+   Pomegranate, Acid Green and Lemon as accents; EB Garamond headings, Inter text,
+   IBM Plex Mono code; 2px corners. Fonts are bundled in fonts/ (OFL).
+   Steps: record.mjs calls setStep(N); elements with data-show="N" fade in at
+   step N and stay, elements with data-focus="N" glow only while step is N. */
+@font-face { font-family: "Inter"; font-weight: 400; src: url(fonts/inter-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Inter"; font-weight: 600; src: url(fonts/inter-latin-600-normal.woff2) format("woff2"); }
+@font-face { font-family: "Inter"; font-weight: 700; src: url(fonts/inter-latin-700-normal.woff2) format("woff2"); }
+@font-face { font-family: "EB Garamond"; font-weight: 400; src: url(fonts/eb-garamond-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "EB Garamond"; font-weight: 400; font-style: italic; src: url(fonts/eb-garamond-latin-400-italic.woff2) format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-weight: 400; src: url(fonts/ibm-plex-mono-latin-400-normal.woff2) format("woff2"); }
+
+:root {
+  /* WordPress.org palette */
+  --charcoal-1: #1e1e1e;
+  --charcoal-2: #23282d;
+  --charcoal-3: #40464d;
+  --charcoal-4: #656a71;
+  --charcoal-5: #979aa1;
+  --light-grey-1: #d9d9d9;
+  --light-grey-2: #f6f6f6;
+  --white: #ffffff;
+  --blueberry-1: #3858e9;
+  --deep-blueberry: #213fd4;
+  --blueberry-2: #9fb1ff;
+  --blueberry-3: #c7d1ff;
+  --blueberry-4: #eff2ff;
+  --pomegranate-1: #e26f56;
+  --pomegranate-3: #ffe9de;
+  --acid-green-1: #33f078;
+  --acid-green-3: #e2ffed;
+  --lemon-1: #fff972;
+  --lemon-3: #fffdd6;
+  /* Roles */
+  --ink: var(--charcoal-1);
+  --muted: var(--charcoal-4);
+  --line: var(--light-grey-1);
+  --accent: var(--blueberry-1);
+  --serif: "EB Garamond", Georgia, serif;
+  --sans: "Inter", -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", Menlo, monospace;
+}
+* { box-sizing: border-box; margin: 0; }
+html, body { width: 1920px; height: 1080px; overflow: hidden; }
+body {
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  padding: 110px 140px;
+  display: flex;
+  flex-direction: column;
+}
+body.dark { background: var(--charcoal-1); color: var(--white); }
+.kicker { font-size: 26px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+body.dark .kicker { color: var(--blueberry-2); }
+h1, h2 { font-family: var(--serif); font-weight: 400; letter-spacing: -.01em; text-wrap: balance; }
+h1 { font-size: 120px; line-height: 1.05; margin-top: 24px; }
+h2 { font-size: 80px; line-height: 1.1; margin-top: 14px; }
+p.lead { font-size: 38px; line-height: 1.4; color: var(--muted); margin-top: 28px; max-width: 1400px; }
+body.dark p.lead { color: var(--charcoal-5); }
+.mark { background: linear-gradient(transparent 62%, var(--blueberry-3) 62%); }
+.mark-solid { font-style: italic; color: var(--blueberry-2); }
+
+/* Cards, rows and labels, used across slides: flat, 2px corners, as on WordPress.org. */
+.row { display: flex; gap: 32px; margin-top: 64px; }
+.card { flex: 1; background: var(--white); border: 1px solid var(--line); border-radius: 2px; padding: 40px 44px; }
+.card h3 { font-family: var(--sans); font-size: 36px; font-weight: 600; margin-bottom: 14px; }
+.card p { font-size: 28px; line-height: 1.45; color: var(--muted); }
+.card .icon { font-size: 56px; line-height: 1; margin-bottom: 22px; }
+.card.blue { border-color: var(--accent); border-top-width: 6px; }
+.card.alt { background: var(--blueberry-4); border-color: var(--blueberry-4); }
+body.dark .card { background: var(--charcoal-2); border-color: var(--charcoal-3); }
+body.dark .card p { color: var(--charcoal-5); }
+.pill { display: inline-block; font-size: 26px; font-weight: 600; padding: 10px 22px; border-radius: 2px; background: var(--accent); color: var(--white); }
+.pill.alt { background: var(--charcoal-1); color: var(--white); }
+.bad { color: var(--pomegranate-1); }
+.term { font-family: var(--mono); background: var(--charcoal-1); color: var(--light-grey-2); border-radius: 2px; }
+.term .cmd { color: var(--blueberry-2); }
+.term .ok { color: var(--acid-green-1); }
+code, .mono { font-family: var(--mono); }
+
+[data-show] { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+[data-focus] { transition: box-shadow .4s ease, transform .4s ease, opacity .4s ease; }
+.on { opacity: 1; transform: none; }
+.focus { box-shadow: 0 0 0 4px var(--accent), 0 24px 60px rgba(0,0,0,.12); transform: scale(1.03); }
