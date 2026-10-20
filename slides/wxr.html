@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>As limitações do WXR</title>
+<link rel="stylesheet" href="slides.css">
+<style>
+.lims{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:48px}
+.lims .card{padding:30px 34px}.lims .card h3{font-size:32px}.lims .card p{font-size:26px}
+.lims .card.bad{border-color:var(--pomegranate-1);border-top-width:6px}
+.workaround{margin-top:14px;font-size:24px;color:var(--pomegranate-1);font-weight:600}
+.code{margin-top:34px;font-family:var(--mono);font-size:26px;background:var(--ink);color:var(--light-grey-2);border-radius:2px;padding:24px 32px}
+.code b{color:var(--blueberry-2);font-weight:600}
+.flow{display:flex;align-items:center;gap:30px;margin-top:34px}
+.box{border:2px solid var(--accent);background:var(--blueberry-4);border-radius:2px;padding:22px 32px;font-size:32px;font-weight:700}
+.box small{display:block;font-size:24px;font-weight:500;color:var(--muted);margin-top:6px}
+.but{font-size:40px;font-weight:800}</style>
+</head>
+<body>
+<div class="kicker">O projeto novo: exportador nativo e importador oficial</div>
+<h2>As limitações do WXR</h2>
+<div class="lims">
+  <div class="card bad" data-show="1" data-focus="1 2"><h3>Páginas</h3><p>Exportar uma página leva todas: não dá para escolher só uma.</p>
+    <p class="workaround" data-show="2">Contorno: apagar as outras no local.</p></div>
+  <div class="card bad" data-show="3" data-focus="3"><h3>Mídia</h3><p>Outra exportação: não dá para escolher páginas e anexos juntos.</p></div>
+  <div class="card bad" data-show="4" data-focus="4"><h3>Vários WXR</h3><p>E as imagens dependem de uma URL pública.</p></div>
+</div>
+<div class="code" data-show="4">&lt;wp:attachment_url&gt;<b>https://site-local.test/wp-content/uploads/foto.jpg</b>&lt;/wp:attachment_url&gt;</div>
+<div class="flow">
+  <div class="box" data-show="5" data-focus="5">Bundle .zip do Playground<small>imagens junto, com um contorno</small></div>
+  <p class="but" data-show="6">Montado à mão, toda vez? <span class="mark">Contraproducente.</span></p>
+</div>
+<script src="slides.js"></script>
+</body>
+</html>

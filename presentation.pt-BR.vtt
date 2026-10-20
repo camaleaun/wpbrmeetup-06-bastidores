@@ -1,0 +1,286 @@
+WEBVTT
+
+00:00:00.250 --> 00:00:00.801
+Olá!
+
+00:00:00.851 --> 00:00:05.205
+Sou Gilberto Tavares, desenvolvedor WordPress desde 2012.
+
+00:00:05.255 --> 00:00:10.204
+Estes são os bastidores de como uma dor que se repete virou um plugin no diretório oficial.
+
+00:00:10.254 --> 00:00:13.767
+Meu primeiro plugin no diretório é o caso, não o assunto.
+
+00:00:14.389 --> 00:00:19.410
+Desde julho de 2025, trabalho numa agência americana de e-commerce.
+
+00:00:19.460 --> 00:00:23.076
+A maioria dos projetos é Adobe Commerce, o Magento 2.
+
+00:00:23.126 --> 00:00:25.764
+Também WordPress/WooCommerce e outros.
+
+00:00:26.371 --> 00:00:30.287
+O WordPress vem de um parceiro que integra ERPs ao WooCommerce.
+
+00:00:30.337 --> 00:00:33.544
+O layout fica com a gente, às vezes com o Figma.
+
+00:00:33.594 --> 00:00:35.410
+Os anteriores eram Elementor.
+
+00:00:35.460 --> 00:00:39.681
+O recente usa um tema performático, híbrido de blocos e clássico.
+
+00:00:40.286 --> 00:00:43.669
+Somos dois desenvolvedores WordPress/WooCommerce.
+
+00:00:43.719 --> 00:00:45.687
+Ele, primariamente Magento.
+
+00:00:45.737 --> 00:00:49.424
+E eu, esse ano treinado na agência como o primeiro Shopware.
+
+00:00:50.045 --> 00:00:51.280
+Qual é o problema?
+
+00:00:51.330 --> 00:00:52.995
+O layout nasce no Figma.
+
+00:00:53.045 --> 00:00:57.320
+No ambiente local, criamos menus, páginas, imagens e conteúdo.
+
+00:00:57.370 --> 00:01:01.429
+Tudo isso precisa se repetir no staging ou em outro ambiente local.
+
+00:01:01.479 --> 00:01:04.583
+Cliente, colega e gerente revisam visualmente.
+
+00:01:04.633 --> 00:01:06.764
+Na prática, tudo é remontado.
+
+00:01:07.385 --> 00:01:09.136
+Queria versionar o conteúdo.
+
+00:01:09.186 --> 00:01:10.486
+Como o WooCommerce.
+
+00:01:10.536 --> 00:01:12.002
+Ou como migrations.
+
+00:01:12.052 --> 00:01:15.074
+Mas acoplar conteúdo ao código parecia drástico.
+
+00:01:15.124 --> 00:01:16.665
+Separar era o caminho.
+
+00:01:17.281 --> 00:01:20.537
+Sugeri migrations e patches, e foi bem aceito.
+
+00:01:20.587 --> 00:01:23.504
+O gerente vem do Magento, onde isso é natural.
+
+00:01:23.554 --> 00:01:26.609
+Foi aceito o modelo JSON do Playground.
+
+00:01:26.659 --> 00:01:29.089
+O colega liderou, alterando um pouco.
+
+00:01:29.139 --> 00:01:31.234
+Até hoje, sem uso efetivo.
+
+00:01:31.284 --> 00:01:34.793
+Também houve a questão de armazenar mídia sem inflar o Git.
+
+00:01:35.407 --> 00:01:39.566
+Nessa nova solução, segui o exportador e o importador nativos.
+
+00:01:39.616 --> 00:01:41.352
+Limitações conhecidas.
+
+00:01:41.402 --> 00:01:43.588
+Exportar uma página leva todas.
+
+00:01:43.638 --> 00:01:45.977
+O contorno é apagar as outras no local.
+
+00:01:46.027 --> 00:01:49.921
+A mídia é outra exportação, sem juntar páginas e anexos.
+
+00:01:49.971 --> 00:01:54.787
+Vários XML, ou um grande, e imagens dependendo de URL pública.
+
+00:01:55.394 --> 00:01:59.054
+O Playground aceita um bundle em zip, com as imagens junto.
+
+00:01:59.104 --> 00:02:01.735
+Montar o zip sem um gerador não compensa.
+
+00:02:02.343 --> 00:02:03.881
+Decidi não reinventar.
+
+00:02:03.931 --> 00:02:07.011
+Usar o exportador nativo e o importador oficial.
+
+00:02:07.061 --> 00:02:08.773
+Acrescentar o que falta.
+
+00:02:08.823 --> 00:02:12.288
+Assim nasceu o Eizport, antes Exporter Importer Z.
+
+00:02:12.338 --> 00:02:13.953
+São três formatos.
+
+00:02:14.003 --> 00:02:17.491
+XML num zip, para o importador com o Eizport.
+
+00:02:17.541 --> 00:02:21.178
+O bundle do Playground, opcionalmente com temas e plugins.
+
+00:02:21.228 --> 00:02:25.124
+E como plugin, que instala o necessário, importa e se exclui.
+
+00:02:25.729 --> 00:02:27.974
+Utilizei Inteligência Artificial.
+
+00:02:28.024 --> 00:02:30.753
+Comecei pelas skills oficiais do WordPress.
+
+00:02:30.803 --> 00:02:32.048
+E criei as minhas.
+
+00:02:32.098 --> 00:02:35.556
+A cada sessão, o aprendizado entra nas minhas skills.
+
+00:02:36.163 --> 00:02:39.361
+A resposta de como o WordPress faz está no código.
+
+00:02:39.411 --> 00:02:42.293
+Minha preferência: Gutenberg e WordPress.
+
+00:02:42.343 --> 00:02:45.852
+Também plugins da Automattic: WooCommerce e Jetpack.
+
+00:02:46.452 --> 00:02:50.048
+Cada funcionalidade começa com a IA no modo de planejamento.
+
+00:02:50.098 --> 00:02:52.658
+Aprovado, segue no modo automático.
+
+00:02:52.708 --> 00:02:55.604
+Se algo fica para depois, entra numa lista.
+
+00:02:55.654 --> 00:03:02.048
+Sempre Git, mesmo local, e nos commits, revisão de diretrizes, qualidade, código e testes.
+
+00:03:02.664 --> 00:03:05.788
+Possíveis preferências já nascem como configuração.
+
+00:03:05.838 --> 00:03:09.283
+Tela de exportar moderna, com componentes do Gutenberg.
+
+00:03:09.333 --> 00:03:11.623
+Mas pode não substituir o Exportar.
+
+00:03:11.673 --> 00:03:14.323
+Ou substituir, com a interface clássica.
+
+00:03:14.373 --> 00:03:16.827
+O importador também pode ser clássico.
+
+00:03:16.877 --> 00:03:19.266
+Outras configurações disponíveis.
+
+00:03:19.884 --> 00:03:22.757
+A documentação faz parte do desenvolvimento.
+
+00:03:22.807 --> 00:03:27.675
+Os screenshots do site e do readme, e o vídeo, são gerados por automatização.
+
+00:03:27.725 --> 00:03:29.934
+Mudou uma funcionalidade ou uma tela?
+
+00:03:29.984 --> 00:03:32.486
+Regera documentação, telas e vídeo.
+
+00:03:32.536 --> 00:03:35.668
+Assim nada fica fragmentado nem desatualizado.
+
+00:03:36.289 --> 00:03:40.090
+Seguir os padrões desde o começo evita reprovação no diretório.
+
+00:03:40.140 --> 00:03:42.688
+Os padrões de código WPCS.
+
+00:03:42.738 --> 00:03:46.808
+E o Plugin Check Plugin, o PCP, rodando a cada mudança.
+
+00:03:47.411 --> 00:03:51.483
+Criei um usuário no WordPress.org, que representa o projeto.
+
+00:03:51.533 --> 00:03:55.649
+Esse usuário precisou ser liberado, porque foi considerado empresa.
+
+00:03:55.699 --> 00:04:00.056
+Um voluntário explicou que empresa não pode responder no fórum como pessoa.
+
+00:04:00.106 --> 00:04:03.397
+Depois, o envio da versão 1.0.0.
+
+00:04:03.447 --> 00:04:13.305
+Fila longa, mas foram poucas interações em poucos dias, automática e manual, e a aprovação veio na 1.0.1, liberando a URL e o SVN.
+
+00:04:13.355 --> 00:04:18.443
+Em breve sai a 1.2.0, com Live Preview e outras funcionalidades.
+
+00:04:18.493 --> 00:04:22.425
+Ter um plugin publicado pode ser o diferencial numa contratação.
+
+00:04:23.035 --> 00:04:27.278
+Sempre valorizei tradução: código em inglês, pronto para traduzir.
+
+00:04:27.328 --> 00:04:35.397
+Palestrei sobre tradução no WordCamp Porto Alegre, em 2018, disponível no WordPress.tv, mas desatualizado.
+
+00:04:35.447 --> 00:04:37.474
+Já desenvolvi com traduções.
+
+00:04:37.524 --> 00:04:42.452
+Ao aprovar o plugin, o readme e o código foram importados, como sugestões.
+
+00:04:42.502 --> 00:04:49.518
+O Fellyph Cintra encontrou o plugin, talvez pela tag e pela funcionalidade do Playground, e aprovou em poucas horas.
+
+00:04:49.568 --> 00:04:51.487
+Obrigado, Fellyph Cintra!
+
+00:04:51.537 --> 00:04:54.512
+Um único ajuste, que eu corrigi e foi aprovado.
+
+00:04:54.562 --> 00:04:57.654
+Paralelamente, estou na fila para ser PTE.
+
+00:04:58.277 --> 00:04:59.232
+O que fica?
+
+00:04:59.282 --> 00:05:01.912
+Dor que se repete é projeto esperando alguém.
+
+00:05:01.962 --> 00:05:06.330
+Ideia aceita não é ideia usada: às vezes, retome por outro caminho.
+
+00:05:06.380 --> 00:05:08.672
+Use o que a plataforma já oferece.
+
+00:05:08.722 --> 00:05:12.222
+Automatize o que se repete, inclusive a documentação.
+
+00:05:12.272 --> 00:05:15.576
+E publique: um plugin no diretório conta a sua história.
+
+00:05:16.198 --> 00:05:26.879
+Contribua com issues no GitHub ou no fórum, e no Apoia.se, inspirado no PainelWP, obrigado Daniel Kossmann, e os outros links nos QR codes, incluindo esta apresentação.
+
+00:05:26.929 --> 00:05:27.808
+Obrigado!

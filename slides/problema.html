@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>O problema</title>
+<link rel="stylesheet" href="slides.css">
+<style>
+.flow{display:flex;align-items:stretch;gap:24px;margin-top:56px}
+.flow .card{padding:32px 36px}.flow .card h3{font-size:38px}
+.to{align-self:center;font-size:56px;color:var(--muted)}
+.list{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.list span{font-size:24px;background:var(--blueberry-4);border-radius:2px;padding:6px 14px}
+.who{display:flex;gap:14px;margin-top:16px;flex-wrap:wrap}
+.who .pill{font-size:24px;padding:8px 18px}
+.manual{margin-top:48px;font-size:54px;font-weight:800;color:var(--pomegranate-1)}
+.manual small{display:block;font-size:32px;font-weight:600;color:var(--muted);margin-top:10px}</style>
+</head>
+<body>
+<div class="kicker">O problema</div>
+<h2>Do Figma ao staging, de novo</h2>
+<div class="flow">
+  <div class="card" data-show="1" data-focus="1"><h3>Figma</h3><p>O layout nasce aqui.</p></div>
+  <div class="to" data-show="2">→</div>
+  <div class="card blue" data-show="2" data-focus="2"><h3>Local</h3><p>Para desenvolver:</p>
+    <div class="list"><span>menus</span><span>páginas</span><span>imagens</span><span>conteúdo de exemplo</span></div></div>
+  <div class="to" data-show="3">→</div>
+  <div class="card blue" data-show="3" data-focus="3 4"><h3>Staging</h3><p>Tudo de novo, para revisar:</p>
+    <div class="who"><span class="pill" data-show="3">cliente</span><span class="pill alt" data-show="4">desenvolvedor</span><span class="pill alt" data-show="4">gerente de projeto</span></div></div>
+</div>
+<p class="manual" data-show="5">Remontado à mão.<small>Página por página, imagem por imagem. Além do código, a revisão é visual.</small></p>
+<script src="slides.js"></script>
+</body>
+</html>

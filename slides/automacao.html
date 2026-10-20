@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>A documentação</title>
+<link rel="stylesheet" href="slides.css">
+<style>
+.pipe{display:flex;align-items:center;gap:26px;margin-top:64px}
+.pipe .card{flex:1;padding:32px 36px}.pipe .card h3{font-size:36px}
+.to{font-size:56px;color:var(--muted)}
+.outs{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.outs .pill{font-size:24px;padding:8px 16px}
+.again{margin-top:56px;font-size:48px;font-weight:800}
+.meta{margin-top:24px;font-size:36px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="kicker">Bastidores</div>
+<h2>A documentação faz parte do desenvolvimento</h2>
+<div class="pipe" data-show="1">
+  <div class="card blue"><h3>Roteiros</h3><p>Cenas, ações e narração em arquivos.</p></div>
+  <div class="to">→</div>
+  <div class="card blue"><h3>Scripts repetíveis</h3><p>Abrem o site, clicam, gravam.</p></div>
+  <div class="to">→</div>
+  <div class="card alt"><h3>Gerados</h3><div class="outs"><span class="pill">screenshots</span><span class="pill">vídeo</span></div></div>
+</div>
+<p class="again" data-show="2">Mudou uma funcionalidade ou uma tela? <span class="mark">Gatilho para regerar.</span></p>
+<p class="meta" data-show="3">Nada fragmentado, nada desatualizado.</p>
+<script src="slides.js"></script>
+</body>
+</html>

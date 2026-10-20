@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>A primeira tentativa</title>
+<link rel="stylesheet" href="slides.css">
+<style>
+.split{display:flex;gap:36px;margin-top:56px}
+.split .card{display:flex;flex-direction:column}
+.when{font-size:26px;font-weight:700;color:var(--accent);margin-bottom:12px}
+.ok{color:var(--charcoal-1);background:var(--acid-green-3);border:1px solid var(--acid-green-1);padding:2px 10px;border-radius:2px;font-size:22px;margin-left:10px;vertical-align:middle}
+.arrow{align-self:center;font-size:72px;color:var(--accent)}
+.card p.status{margin-top:22px;font-size:30px;font-weight:700;color:var(--pomegranate-1)}
+.q{margin-top:44px;font-size:40px;font-weight:700}</style>
+</head>
+<body>
+<div class="kicker">A primeira tentativa</div>
+<h2>Uma ideia aceita</h2>
+<div class="split">
+  <div class="card blue" data-show="1" data-focus="1 2"><div class="when">A minha sugestão</div>
+    <h3>Migrations e patches <span class="ok">aceito</span></h3><p>Como no Adobe Commerce, de onde vem o gerente de projeto.</p>
+    <h3 data-show="2" style="margin-top:22px">Blueprints em JSON <span class="ok">aceito</span></h3><p data-show="2">Com os steps do WordPress Playground.</p></div>
+  <div class="arrow" data-show="3">→</div>
+  <div class="card" data-show="3" data-focus="3 4"><div class="when">O caminho seguido</div><h3>Integrado ao pipeline de deploy</h3><p>Liderado pelo colega com mais tempo de casa.</p>
+    <p class="status" data-show="4">Até hoje, sem uso efetivo.</p></div>
+</div>
+<p class="q" data-show="5">E as imagens e os zips? <span class="mark">Sem fazer o Git crescer.</span></p>
+<script src="slides.js"></script>
+</body>
+</html>

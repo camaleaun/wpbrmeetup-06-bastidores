@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>O contexto</title>
+<link rel="stylesheet" href="slides.css">
+<style>
+.platforms{display:flex;flex-wrap:wrap;gap:14px;margin-top:48px;align-items:center}
+.platforms .pill{font-size:28px;padding:12px 22px;background:var(--light-grey-2);color:var(--ink);border:1px solid var(--line)}
+.platforms .main{font-size:32px;background:var(--charcoal-1);color:var(--white);border-color:var(--charcoal-1)}
+.platforms .wp{background:var(--accent);color:var(--white);border-color:var(--accent)}
+.row{margin-top:48px}
+.era{display:flex;align-items:center;gap:22px;margin-top:20px;font-size:30px}
+.era .old{color:var(--muted);text-decoration:line-through}
+.era .to{color:var(--accent);font-size:40px}</style>
+</head>
+<body>
+<div class="kicker">Julho de 2025</div>
+<h2>Uma agência de e-commerce</h2>
+<div class="platforms">
+  <span class="pill main" data-show="1">Adobe Commerce <small style="font-weight:400">(Magento 2)</small></span>
+  <span class="pill" data-show="2">Shopify</span>
+  <span class="pill" data-show="2">BigCommerce</span>
+  <span class="pill wp" data-show="2" data-focus="3 4 5 6">WordPress/WooCommerce</span>
+  <span class="pill" data-show="2">Shopware</span>
+</div>
+<div class="row">
+  <div class="card blue" data-show="3" data-focus="3"><h3>O parceiro</h3><p>Desenvolve integrações de ERP com o WooCommerce.</p></div>
+  <div class="card blue" data-show="4" data-focus="4"><h3>A agência</h3><p>O layout terceirizado: o tema, os recursos de layout e, às vezes, o Figma.</p></div>
+  <div class="card alt" data-show="5" data-focus="5 6"><h3>Os temas</h3>
+    <div class="era"><span class="old">Elementor</span></div>
+    <div class="era" data-show="6"><span class="to">→</span><span>Tema pai próprio: híbrido de blocos e clássico, com performance aprimorada</span></div></div>
+</div>
+<script src="slides.js"></script>
+</body>
+</html>

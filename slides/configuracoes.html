@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Preferência vira configuração</title>
+<link rel="stylesheet" href="slides.css">
+<style>
+.ui{display:flex;align-items:stretch;gap:30px;margin-top:52px}
+.ui .card{padding:34px 40px}
+.ui .card h3{font-size:36px}.ui .card p{font-size:27px}
+.ui .card small{display:block;font-family:var(--mono);font-size:22px;color:var(--accent);margin-top:12px}
+.toggle{align-self:center;width:96px;height:52px;border-radius:26px;background:var(--accent);position:relative;flex:none}
+.toggle i{position:absolute;top:6px;left:50px;width:40px;height:40px;border-radius:50%;background:var(--white);opacity:1!important;transform:none!important;transition:left .4s ease}
+.toggle i.on{left:6px}
+.toggle:has(i.on){background:var(--charcoal-4)}
+.opts{display:flex;flex-wrap:wrap;gap:14px;margin-top:40px}
+.opts .pill{font-size:26px;padding:10px 20px;background:var(--light-grey-2);color:var(--ink);border:1px solid var(--line)}
+.opts .pill.imp{background:var(--blueberry-4);border-color:var(--blueberry-3)}</style>
+</head>
+<body>
+<div class="kicker">Bastidores</div>
+<h2>Preferência vira configuração</h2>
+<div class="ui">
+  <div class="card blue" data-show="1" data-focus="1"><h3>Interface moderna</h3><p>Como as telas mais novas do painel.</p><small>DataViews · DataForm</small></div>
+  <div class="toggle" data-show="1"><i data-show="2"></i></div>
+  <div class="card" data-show="2" data-focus="2 3"><h3>O Exportar de sempre</h3><p>Intocado, com a tela nova num item próprio.</p>
+    <p data-show="3" style="margin-top:14px"><b>Ou a tela clássica</b>, com as mesmas escolhas a mais.</p></div>
+</div>
+<div class="opts">
+  <span class="pill imp" data-show="4" data-focus="4">Importador: visual novo ou o de sempre</span>
+  <span class="pill" data-show="5">Outras configurações</span>
+</div>
+<script src="slides.js"></script>
+</body>
+</html>

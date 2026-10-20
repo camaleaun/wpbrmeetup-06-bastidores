@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bastidores de Projetos com WordPress</title>
+<style>
+  :root { --ink:#1e1e1e; --paper:#f6f6f6; --accent:#3858e9; --muted:#656a71; --line:#d9d9d9; --card:#fff; }  /* WordPress.org palette */
+  @media (prefers-color-scheme: dark) { :root { --ink:#f6f6f6; --paper:#1e1e1e; --accent:#9fb1ff; --muted:#979aa1; --line:#40464d; --card:#23282d; } }
+  * { box-sizing: border-box; } body { margin:0; background:var(--paper); color:var(--ink); font:16px/1.45 -apple-system, system-ui, sans-serif; }
+  main { display:grid; grid-template-columns: minmax(0,1.6fr) minmax(320px,1fr); gap:24px; padding:24px; height:100vh; }
+  @media (max-width: 1000px) { main { grid-template-columns:1fr; height:auto; } }
+  video { width:100%; border-radius:12px; background:#000; }
+  .bar { display:flex; gap:12px; align-items:center; margin:12px 0; flex-wrap:wrap; }
+  a.button, button { font:inherit; border:1px solid var(--line); background:var(--card); color:var(--ink); padding:6px 12px; border-radius:8px; cursor:pointer; text-decoration:none; }
+  button.on { background:var(--accent); color:#fff; border-color:var(--accent); }
+  .list { overflow:auto; border:1px solid var(--line); border-radius:12px; background:var(--card); }
+  .scene { position:sticky; top:0; background:var(--card); padding:10px 14px; font-weight:700; border-bottom:1px solid var(--line); }
+  .row { display:grid; grid-template-columns: 54px 1fr; gap:4px 10px; padding:10px 14px; border-bottom:1px solid var(--line); cursor:pointer; }
+  .row:hover { background:color-mix(in srgb, var(--accent) 12%, transparent); }
+  .row.now { background:color-mix(in srgb, var(--accent) 28%, transparent); }
+  .t { color:var(--muted); font-variant-numeric:tabular-nums; } .id { color:var(--muted); font-size:13px; }
+  h1 { font-size:20px; margin:0 0 4px; } p.hint { color:var(--muted); margin:0; }
+  main.solo { grid-template-columns:1fr; max-width:1100px; margin:0 auto; height:auto; }
+</style></head><body><main class="solo">
+<section>
+  <h1>Bastidores de Projetos com WordPress <small style="color:var(--muted);font-weight:400">· 5:28</small></h1>
+  
+  <video id="v" controls preload="metadata" src="presentation.mp4">
+    <track kind="subtitles" srclang="pt-BR" label="Português" src="presentation.pt-BR.vtt" default>
+  </video>
+  <div class="bar">
+    <button id="leg" class="on">Legenda</button>
+    <a class="button" href="slides/index.html">Abrir os slides</a>
+  </div>
+</section>
+</main>
+<script>
+  const v = document.getElementById('v');
+  const rows = [...document.querySelectorAll('.row')];
+  rows.forEach((r) => r.onclick = () => { v.currentTime = +r.dataset.s; v.play(); });
+  v.ontimeupdate = () => rows.forEach((r) => {
+    const on = v.currentTime >= +r.dataset.s && v.currentTime < +r.dataset.e;
+    if (on && !r.classList.contains('now')) r.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    r.classList.toggle('now', on);
+  });
+  document.getElementById('leg').onclick = (e) => {
+    const t = v.textTracks[0]; t.mode = t.mode === 'showing' ? 'disabled' : 'showing';
+    e.target.classList.toggle('on', t.mode === 'showing');
+  };
+</script></body></html>
